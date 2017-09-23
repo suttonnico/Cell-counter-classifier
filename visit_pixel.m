@@ -1,0 +1,62 @@
+function [ V,hx,lx,hy,ly ] = visit_pixel( G,x,y,V,hx,lx,hy,ly,n )
+%UNTITLED Summary of this function goes here
+%
+n=n+1;
+if(n<400)
+    [N,M]=size(G);
+    if(x+1<N)
+    if((G(x+1,y)==1)&&(V(x+1,y)==0))
+        %xxx
+        %xoX
+        %xxx
+        V(x+1,y)=1;
+        if(x+1>hx)
+            hx=x+1;
+        end
+        [V,hx,lx,hy,ly]=visit_pixel(G,x+1,y,V,hx,lx,hy,ly,n);
+    end
+    end
+    if(x-1>0)
+    if((G(x-1,y)==1)&&(V(x-1,y)==0))
+        %xxx
+        %Xox
+        %xxx
+        V(x-1,y)=1;
+        if(x-1<lx)
+            lx=x-1;
+        end
+        [V,hx,lx,hy,ly]=visit_pixel(G,x-1,y,V,hx,lx,hy,ly,n);
+    end
+    end
+    if(y+1<M)
+    if((G(x,y+1)==1)&&(V(x,y+1)==0))
+        %xXx
+        %xox
+        %xxx
+        V(x,y+1)=1;
+        if(y+1>hy)
+            hy=y+1;
+        end
+        [V,hx,lx,hy,ly]=visit_pixel(G,x,y+1,V,hx,lx,hy,ly,n);
+    end
+    end
+    if(y-1>0)
+    if((G(x,y-1)==1)&&(V(x,y-1)==0))
+        %xxx
+        %xox
+        %xXx
+        V(x,y-1)=1;
+        if(y-1<ly)
+            ly=y-1;
+        end
+        [V,hx,lx,hy,ly]=visit_pixel(G,x,y-1,V,hx,lx,hy,ly,n);
+    end
+    end
+else
+    hx=0;
+    lx=0;
+    hy=0;
+    ly=0;
+end
+end
+
